@@ -1,4 +1,5 @@
 include .env
+
 full-test:
 	poetry run pytest --show-capture=stdout --showlocals -vv
 light-test:
@@ -25,7 +26,7 @@ test-coverage:
 # DEV
 
 dev:
-	poetry run flask --app expenses_app:app --debug run
+	docker-compose -f docker-compose.dev.yml up
 
 server:
 	sudo service postgresql start
@@ -33,7 +34,8 @@ server:
 
 #  PROD
 start:
-	poetry run gunicorn -w 5 -b 0.0.0.0:${PORT} expenses_app:app
+	# poetry run gunicorn -w 5 -b 0.0.0.0:${PORT} expenses_app:app
+	poetry run uvicorn expenses_app:app --host ${HOST} --port ${PORT} --reload
 
 py:
 	poetry run python
