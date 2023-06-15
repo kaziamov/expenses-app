@@ -1,22 +1,22 @@
-# name: coverage
+name: coverage
 
-# on:
-#   push:
-#     branches: [ "main" ]
+on:
+  push:
+    branches: [ "*" ]
 
-# jobs:
-#   build:
+jobs:
+  build:
 
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-python@v2
-#       - run: pip install poetry
-#       - run: make install
-#       - name: Test & publish code coverage
-#         uses: paambaati/codeclimate-action@v2.7.4
-#         env:
-#           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-#         with:
-#           coverageCommand: make test-coverage
-#           debug: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - run: pip install poetry
+      - run: poetry install
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.7.4
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: poetry run pytest --cov=expenses_app --cov-report xml
+          debug: true
