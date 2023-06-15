@@ -23,7 +23,7 @@ async def connect():
         if not _pool:
             _pool = await asyncpg.create_pool(
                 init=connection_init,
-                database=DATABASE_URL,
+                database=DB_NAME,
                 user=DB_USER,
                 password=DB_PASS,
                 host=DB_HOST,
