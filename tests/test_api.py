@@ -1,8 +1,8 @@
-import json
 from fastapi.testclient import TestClient
 from ..expenses_app.api import app
 
 client = TestClient(app)
+
 
 def test_create_item():
     data = {"name": "Ноутбук", "price": 1500.0}
