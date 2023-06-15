@@ -35,7 +35,8 @@ server:
 #  PROD
 start:
 	# poetry run gunicorn -w 5 -b 0.0.0.0:${PORT} expenses_app:app
-	poetry run uvicorn expenses_app:app --host ${HOST} --port ${PORT} --reload
+	# poetry run uvicorn expenses_app:app --host ${HOST} --port ${PORT} --reload
+	poetry run uvicorn expenses_app:app --reload
 
 py:
 	poetry run python
