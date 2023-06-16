@@ -25,3 +25,4 @@ else:
     DB_PASS = os.getenv("PG_PASSWORD")
     DB_HOST = os.getenv("PG_HOST")
     DB_PORT = os.getenv("PG_PORT")
+    DATABASE_URL = f'postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
