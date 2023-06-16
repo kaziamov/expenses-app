@@ -2,22 +2,22 @@ import asyncpg
 import asyncio
 from contextlib import asynccontextmanager
 from typing import Optional
-from .settings import *
+from settings import *
 
 _pool: Optional[asyncpg.pool.Pool] = None
-_pool_lock = None
+_pool_lock: Optional[asyncio.Lock] = None
 
 
 def init_pool_lock():
     global _pool_lock
-    _pool_lock = asyncio.lock()
+    _pool_lock = asyncio.Lock()
 
 
 async def connection_init(conn):
     return conn
 
 
-async def connect():
+async def connect() -> asyncpg.Pool:
     global _pool
     async with _pool_lock:
         if not _pool:
