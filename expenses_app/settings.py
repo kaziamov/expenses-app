@@ -4,6 +4,10 @@ from urllib.parse import urlparse
 
 
 dotenv.load_dotenv()
+
+PORT = int(os.getenv("PORT", 8000))
+HOST = os.getenv("HOST", "0.0.0.0")
+
 MAX_CONN = os.getenv("MAX_CONN", 2)
 MIN_CONN = os.getenv("MAX_CONN", 1)
 
@@ -15,10 +19,9 @@ if DATABASE_URL:
     DB_NAME = DATABASE_URL.path[1:]
     DB_USER = DATABASE_URL.username
     DB_PASS = DATABASE_URL.password
-
-
-DB_NAME = os.getenv("PGDATABASE")
-DB_USER = os.getenv("PGUSER")
-DB_PASS = os.getenv("PGPASSWORD")
-DB_HOST = os.getenv("PGHOST")
-DB_PORT = os.getenv("PGPORT")
+else:
+    DB_NAME = os.getenv("PG_DATABASE")
+    DB_USER = os.getenv("PG_USER")
+    DB_PASS = os.getenv("PG_PASSWORD")
+    DB_HOST = os.getenv("PG_HOST")
+    DB_PORT = os.getenv("PG_PORT")
