@@ -67,6 +67,14 @@ class BaseDBModel(DeclarativeBase):
     id = Column(Integer, primary_key=True, autoincrement=True)
 
 
+class AccountModel(BaseDBModel):
+    """Model for Money Accounts"""
+
+    __tablename__ = "accounts"
+    name = Column(String, nullable=False, unique=True)
+    expenses = relationship("ExpenseModel", back_populates="account")
+
+
 class CategoryModel(BaseDBModel):
     """Model for Category"""
 
@@ -80,4 +88,4 @@ class ExpenseModel(BaseDBModel):
 
     __tablename__ = "categories"
     name = Column(String, nullable=True)
-    category = relationship("CategoryModel", back_populates="expenses")
+    category = relationship("CategoryModel", back_populates="expense")
