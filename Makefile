@@ -34,10 +34,11 @@ server:
 
 #  PROD
 start:
-	poetry run uvicorn expenses_app:app --host ${HOST} --port ${PORT} --reload
+	# poetry run uvicorn expenses_app:app --host ${HOST} --port ${PORT} --reload
+	poetry run python expenses_app/main.py
 
 py:
 	poetry run python
 
 run-db:
-	docker-compose up --force-recreate
+	docker-compose -f docker-compose.db.yml up --force-recreate
