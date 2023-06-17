@@ -7,6 +7,9 @@ dotenv.load_dotenv()
 
 DEBUG = bool(os.getenv("DEBUG", False))
 
+PORT = int(os.getenv("UVICORN_PORT", 8000))
+HOST = os.getenv("UVICORN_HOST", "0.0.0.0")
+
 MAX_CONN = os.getenv("MAX_CONN", 2)
 MIN_CONN = os.getenv("MAX_CONN", 1)
 
