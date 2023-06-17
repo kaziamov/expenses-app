@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from .schemas import ExpenseSchema
-from . import controllers
+from expenses_app.schemas import ExpenseSchema, CategoriesSchema
+from expenses_app import controllers
 
 
 router = APIRouter()
