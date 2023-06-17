@@ -5,8 +5,7 @@ from urllib.parse import urlparse
 
 dotenv.load_dotenv()
 
-PORT = int(os.getenv("PORT", 8000))
-HOST = os.getenv("HOST", "0.0.0.0")
+DEBUG = bool(os.getenv("DEBUG", False))
 
 MAX_CONN = os.getenv("MAX_CONN", 2)
 MIN_CONN = os.getenv("MAX_CONN", 1)
