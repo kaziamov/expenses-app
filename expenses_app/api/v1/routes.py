@@ -34,8 +34,9 @@ async def get_categories():
 
 
 @router.post("/categories/create")
-async def create_category():
-    return await controllers.get_categories()
+async def create_category(item: CategoriesSchema):
+    data = dict(item)
+    return await controllers.add_category(data)
 
 
 @router.patch("/categories/{exp_id}/edit")
