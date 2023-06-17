@@ -58,7 +58,7 @@
 
 
 from sqlalchemy.orm import DeclarativeBase, relationship
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, ForeignKey
 
 
 class BaseDBModel(DeclarativeBase):
@@ -72,20 +72,21 @@ class AccountModel(BaseDBModel):
 
     __tablename__ = "accounts"
     name = Column(String, nullable=False, unique=True)
-    expenses = relationship("ExpenseModel", back_populates="account")
 
 
 class CategoryModel(BaseDBModel):
     """Model for Category"""
 
-    __tablename__ = "expenses"
+    __tablename__ = "categories"
     name = Column(String, nullable=False, unique=True)
-    expenses = relationship("ExpenseModel", back_populates="category")
 
 
 class ExpenseModel(BaseDBModel):
     """Model for Expenses"""
 
-    __tablename__ = "categories"
+    __tablename__ = "expenses"
     name = Column(String, nullable=True)
-    category = relationship("CategoryModel", back_populates="expense")
+    accounts_id = Column(Integer, ForeignKey("accounts.id"))
+    category = relationship("CategoryModel", backref="expenses")
+    category_id = Column(Integer, ForeignKey("categories.id"))
+    account = relationship("AccountModel", backref="expenses")
