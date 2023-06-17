@@ -1,11 +1,13 @@
-include .env
+PORT ?=8000
+HOST ?=0.0.0.0
+APP ?=expenses_app
 
 full-test:
 	poetry run pytest --show-capture=stdout --showlocals -vv
 light-test:
 	poetry run pytest --no-summary --disable-pytest-warnings
 lint:
-	poetry run flake8 expenses_app tests
+	poetry run flake8 $(APP) tests
 check: light-test lint
 push: check
 	git push
@@ -20,25 +22,35 @@ publish:
 package-install:
 	python3 -m pip install --user dist/*.whl --force
 test-coverage:
-	poetry run pytest --cov=expenses_app --cov-report xml
+	poetry run pytest --cov=$(APP) --cov-report xml
 
 
 # DEV
+stop:
+	docker-compose stop
 
-dev:
-	docker-compose -f docker-compose.dev.yml up
+rm: stop
+	docker-compose rm \
+	&& sudo rm -rf pgdata/
+
+migrate:
+	alembic upgrade head \
+	&& alembic revision --autogenerate -m "init" \
+	&& alembic upgrade head
+
+dev: stop run-db start
+
 
 server:
 	sudo service postgresql start
 
+run-db: stop
+	docker-compose -f docker-compose.db.yml up -d
 
 #  PROD
 start:
-	# poetry run uvicorn expenses_app:app --host ${HOST} --port ${PORT} --reload
-	poetry run python expenses_app/main.py
+	poetry run uvicorn $(APP):app --host $(HOST) --port $(PORT) --reload
+	# poetry run python $(APP)/main.py
 
 py:
 	poetry run python
-
-run-db:
-	docker-compose -f docker-compose.db.yml up --force-recreate
