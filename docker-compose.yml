@@ -9,6 +9,8 @@ services:
       - .:/app
     depends_on:
       - db
+    networks:
+      - backend
     ports:
       - ${PORT}:${PORT}
     command: bash -c "cd app && pip install poetry && poetry install && make start"
@@ -22,5 +24,11 @@ services:
     volumes:
       - ./pgdata:/var/lib/postgresql/data
       # - ./database.sql/docker-entrypoint-initdb.d/001.sql
+    networks:
+      - backend
     ports:
       - ${PG_PORT}:${PG_PORT}
+
+networks:
+  backend:
+    driver: "bridge"
