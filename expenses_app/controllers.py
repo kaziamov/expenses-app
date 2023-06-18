@@ -17,4 +17,3 @@ async def add_category(data: dict):
         await conn.commit()
         await conn.refresh(new_category)
     return new_category
-

@@ -14,7 +14,6 @@ async def get_connection() -> AsyncSession:
 
 
 class BaseConnection:
-    pass
     def __init__(self) -> None:
         pass
 
@@ -25,7 +24,9 @@ class BaseConnection:
 
 class AlchemyConnection(BaseConnection):
     def __init__(self) -> None:
-        self.engine = create_async_engine(ASYNC_DATABASE_URL, pool_size=MIN_CONN, max_overflow=MAX_CONN)
+        self.engine = create_async_engine(ASYNC_DATABASE_URL,
+                                          pool_size=MIN_CONN,
+                                          max_overflow=MAX_CONN)
         self.async_session = sessionmaker(engine, class_=AsyncSession)
 
     async def get_connect(self):
