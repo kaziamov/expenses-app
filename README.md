@@ -3,7 +3,9 @@
 
 # Expenses App
 
-[Live Demo](https://expenses-app-7w0v.onrender.com)
+[Live Demo](https://expenses-app.kaziamov.com/)
+
+Previous version on Flask [here](https://github.com/kaziamov/expenses-app-flask)
 
 ## Features
 
