@@ -45,7 +45,7 @@ server:
 	sudo service postgresql start
 
 run-db: stop
-	docker-compose -f docker-compose.db.yml up -d
+	docker-compose -f docker-compose.db.yml up
 
 #  PROD
 start:
