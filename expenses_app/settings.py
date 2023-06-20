@@ -22,11 +22,11 @@ MIN_CONN = os.getenv("MAX_CONN", 1)
 #     DB_HOST = parsed_url.hostname
 #     DB_PORT = parsed_url.port
 # else:
-DB_NAME = os.getenv("PG_DATABASE")
-DB_USER = os.getenv("PG_USER")
-DB_PASS = os.getenv("PG_PASSWORD")
-DB_HOST = os.getenv("PG_HOST")
-DB_PORT = os.getenv("PG_PORT")
+DB_NAME = os.getenv("PGDATABASE")
+DB_USER = os.getenv("PGUSER")
+DB_PASS = os.getenv("PGPASSWORD")
+DB_HOST = os.getenv("PGHOST")
+DB_PORT = os.getenv("PGPORT")
 
 ASYNC_DATABASE_URL = f'postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 DATABASE_URL = f'postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
