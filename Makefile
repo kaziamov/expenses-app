@@ -54,3 +54,8 @@ start:
 
 py:
 	poetry run python
+
+recreate-venv:
+	rm -rf `poetry env info -p` \
+	&& poetry install \
+	&& poetry shell
