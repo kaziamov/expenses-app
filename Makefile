@@ -1,4 +1,4 @@
-PORT ?=8000
+PORT ?=8443
 HOST ?=0.0.0.0
 APP ?=expenses_app
 
@@ -34,9 +34,9 @@ rm: stop
 	&& sudo rm -rf pgdata/
 
 migrate:
-	alembic upgrade head \
-	&& alembic revision --autogenerate -m "init" \
-	&& alembic upgrade head
+	poetry run alembic upgrade head \
+	&& poetry run alembic revision --autogenerate -m "init" \
+	&& poetry run alembic upgrade head
 
 dev: stop run-db start
 
