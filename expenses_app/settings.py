@@ -30,3 +30,8 @@ DB_PORT = os.getenv("PGPORT")
 
 ASYNC_DATABASE_URL = f'postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 DATABASE_URL = f'postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
+
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+BASE_URL = os.getenv("BASE_URL")
+WEBHOOK_PATH = f"/bot/{TELEGRAM_TOKEN}"
+WEBHOOK_URL = f"{BASE_URL}/{WEBHOOK_PATH}"
